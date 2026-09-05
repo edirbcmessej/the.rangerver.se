@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Browse the Techrangers webring in the Ranger Portal.">
+    <meta name="theme-color" content="#ffca18">
+    <script>
+      (() => {
+        try {
+          const saved = localStorage.getItem("rangerverse-theme");
+          const theme = saved === "light" || saved === "dark"
+            ? saved
+            : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.dataset.theme = theme;
+        } catch {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../assets/portal.css?v={{ASSET_VERSION}}">
+    <title>Ranger Portal — {{TITLE}}</title>
+  </head>
+  <body>
+    <main class="portal-shell" id="portal-shell">
+      <header class="portal-bar">
+        <a class="portal-button portal-home" href="../" aria-label="Back to the Rangerverse">
+          <span aria-hidden="true">←</span>
+          <span>rangerverse</span>
+        </a>
+
+        <div class="portal-identity" aria-live="polite">
+          <strong id="portal-title">Ranger Portal</strong>
+          <span id="portal-url">locking onto a signal…</span>
+        </div>
+
+        <nav class="portal-nav" aria-label="Browse the Rangerverse">
+          <button class="portal-button" id="portal-previous" type="button" aria-label="Previous Ranger">← <span>prev</span></button>
+          <button class="portal-button portal-random" id="portal-random" type="button" aria-label="Random Ranger">✦ <span>random</span></button>
+          <button class="portal-button" id="portal-next" type="button" aria-label="Next Ranger"><span>next</span> →</button>
+          <a class="portal-button" id="portal-external" href="#" target="_blank" rel="noopener" aria-label="Open Ranger site in a new tab">↗ <span>open</span></a>
+        </nav>
+      </header>
+
+      <section class="portal-stage" aria-label="Ranger website">
+        <div class="portal-loading" id="portal-loading" role="status">
+          <b aria-hidden="true">✦</b>
+          <span>tuning into the Rangerverse…</span>
+        </div>
+        <iframe id="portal-frame" title="Ranger site" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        <noscript><p class="portal-error">The Ranger Portal needs JavaScript to navigate the ring.</p></noscript>
+      </section>
+    </main>
+    <script src="../assets/portal.js?v={{ASSET_VERSION}}"></script>
+  </body>
+</html>

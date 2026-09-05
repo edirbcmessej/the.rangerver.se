@@ -21,6 +21,8 @@ await cp(path.join(root, "src"), output, { recursive: true });
 const versionedSource = await Promise.all(
   [
     "src/assets/app.js",
+    "src/assets/portal.css",
+    "src/assets/portal.js",
     "src/assets/redirect.css",
     "src/assets/redirect.js",
     "src/assets/rangerverse-max.webp",
@@ -50,15 +52,18 @@ const replacements = {
   "{{TICKER}}": tickerMarkup,
 };
 
-let html = await readFile(path.join(output, "index.html"), "utf8");
-for (const [token, value] of Object.entries(replacements)) html = html.replaceAll(token, value);
-await writeFile(path.join(output, "index.html"), html);
+for (const page of ["index.html", "portal/index.html"]) {
+  const pagePath = path.join(output, page);
+  let html = await readFile(pagePath, "utf8");
+  for (const [token, value] of Object.entries(replacements)) html = html.replaceAll(token, value);
+  await writeFile(pagePath, html);
+}
 
 await mkdir(path.join(output, "data"), { recursive: true });
 await writeFile(path.join(output, "data", "site.json"), `${JSON.stringify(site, null, 2)}\n`);
 await writeFile(path.join(output, "data", "rangers.json"), `${JSON.stringify(rangers, null, 2)}\n`);
 
-for (const asset of ["app.js", "redirect.js"]) {
+for (const asset of ["app.js", "portal.js", "redirect.js"]) {
   const assetPath = path.join(output, "assets", asset);
   const source = await readFile(assetPath, "utf8");
   await writeFile(assetPath, source.replaceAll("{{ASSET_VERSION}}", assetVersion));
@@ -84,6 +89,8 @@ if (site.cname) await writeFile(path.join(output, "CNAME"), `${site.cname}\n`);
 for (const generatedFile of [
   "index.html",
   "assets/app.js",
+  "assets/portal.js",
+  "portal/index.html",
   "assets/redirect.js",
   "prev/index.html",
   "next/index.html",

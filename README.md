@@ -34,7 +34,7 @@ That member puts this on their own site, replacing `ada` with their slug:
 
 The redirect pages also try to identify members from the referring domain, but `?from=slug` is explicit and more reliable.
 
-The fullscreen browser has copyable hash links. `https://the.rangerver.se/#viewer` opens it immediately, and `https://the.rangerver.se/#viewer=ada` opens a specific Ranger by slug. Moving between Rangers keeps the URL synchronized.
+The dedicated portal at `https://the.rangerver.se/portal/` opens a random Ranger inside the full-screen browser. Link to a specific Ranger with their slug, for example `https://the.rangerver.se/portal/?ranger=ada`. Moving between Rangers keeps that URL synchronized.
 
 ## Change site copy or links
 
