@@ -5,7 +5,6 @@
   let current = 0;
   let site = null;
 
-  const cards = document.querySelector("#cards");
   const address = document.querySelector("#address");
   const hint = document.querySelector("#ringhint");
   const ringScreen = document.querySelector("#ring-screen");
@@ -58,32 +57,6 @@
     if (text !== undefined) node.textContent = text;
     return node;
   };
-
-  function renderCards() {
-    const fragment = document.createDocumentFragment();
-    rangers.forEach((ranger, index) => {
-      const card = el("button", "card");
-      card.type = "button";
-      card.setAttribute("aria-label", `Browse ${ranger.name}'s site in the Rangerverse viewer`);
-
-      const status = el("i", "status");
-      status.dataset.status = ranger.status;
-      status.title = `Site status: ${ranger.status}`;
-      const avatar = el("div", "avatar", ranger.avatar);
-      const heading = el("h3", "", ranger.name);
-      const handle = el("div", "handle", [ranger.handle, ranger.era].filter(Boolean).join(" · "));
-      const description = el("p", "", ranger.description);
-      const tags = el("div", "tags");
-      tags.append(...ranger.tags.map((tag) => el("span", "tag", tag)));
-
-      card.append(status, avatar, heading, handle);
-      if (ranger.description) card.append(description);
-      if (ranger.tags.length) card.append(tags);
-      card.addEventListener("click", (event) => openViewer(index, event));
-      fragment.append(card);
-    });
-    cards.replaceChildren(fragment);
-  }
 
   function update(animate = false) {
     const ranger = rangers[current];
@@ -195,12 +168,19 @@
       ]);
       if (!siteResponse.ok || !rangerResponse.ok) throw new Error("The generated data files could not be loaded.");
       [site, rangers] = await Promise.all([siteResponse.json(), rangerResponse.json()]);
-      renderCards();
       configureJoin();
       update();
     } catch (error) {
       console.error(error);
-      cards.replaceChildren(el("p", "notice", "The Ranger directory missed its connection. Try refreshing in a moment."));
+      address.textContent = "Ranger Browser offline";
+      address.removeAttribute("href");
+      previewStatus.dataset.status = "offline";
+      previewName.textContent = "Signal lost";
+      previewMeta.textContent = "The ring missed its connection";
+      previewDescription.hidden = false;
+      previewDescription.textContent = "Try refreshing in a moment.";
+      previewTags.hidden = true;
+      visitRanger.disabled = true;
       hint.textContent = "The ring is temporarily out of orbit.";
     }
   }

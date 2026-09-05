@@ -47,6 +47,6 @@
     })
     .catch((error) => {
       console.error(error);
-      message.textContent = "The ring missed a connection. Head back to the directory and try again.";
+      message.textContent = "The ring missed a connection. Head back to the Rangerverse and try again.";
     });
 })();
