@@ -101,6 +101,30 @@
     return next;
   }
 
+  function viewerIndexFromHash() {
+    const hash = location.hash.slice(1);
+    if (hash === "viewer") return current;
+    const separator = hash.startsWith("viewer=") ? "=" : hash.startsWith("viewer/") ? "/" : "";
+    if (!separator) return null;
+    let slug;
+    try {
+      slug = decodeURIComponent(hash.slice(hash.indexOf(separator) + 1));
+    } catch {
+      return 0;
+    }
+    const index = rangers.findIndex((ranger) => ranger.slug === slug);
+    return index >= 0 ? index : 0;
+  }
+
+  function syncViewerUrl(ranger) {
+    const hash = `#viewer=${encodeURIComponent(ranger.slug)}`;
+    if (location.hash !== hash) history.replaceState(null, "", `${location.pathname}${location.search}${hash}`);
+  }
+
+  function clearViewerUrl() {
+    if (viewerIndexFromHash() !== null) history.replaceState(null, "", `${location.pathname}${location.search}`);
+  }
+
   function loadViewer(index) {
     current = (index + rangers.length) % rangers.length;
     const ranger = rangers[current];
@@ -112,6 +136,7 @@
     viewerExternal.setAttribute("aria-label", `Open ${ranger.name}'s site in a new tab`);
     viewerFrame.title = `${ranger.name}'s site`;
     viewerFrame.src = ranger.url;
+    syncViewerUrl(ranger);
   }
 
   function openViewer(index, event) {
@@ -127,7 +152,8 @@
     requestAnimationFrame(() => requestAnimationFrame(() => viewer.classList.add("is-open")));
   }
 
-  function closeViewer() {
+  function closeViewer(syncUrl = true) {
+    if (syncUrl) clearViewerUrl();
     viewer.classList.remove("is-open");
     clearTimeout(closeTimer);
     closeTimer = setTimeout(() => {
@@ -143,6 +169,17 @@
   }
 
   function randomViewerRanger() { loadViewer(randomIndex()); }
+
+  function handleViewerHash() {
+    if (!rangers.length) return;
+    const index = viewerIndexFromHash();
+    if (index === null) {
+      if (viewer.open) closeViewer(false);
+      return;
+    }
+    if (viewer.open) loadViewer(index);
+    else openViewer(index);
+  }
 
   function configureJoin() {
     const submit = document.querySelector("#submit-site");
@@ -170,6 +207,7 @@
       [site, rangers] = await Promise.all([siteResponse.json(), rangerResponse.json()]);
       configureJoin();
       update();
+      handleViewerHash();
     } catch (error) {
       console.error(error);
       address.textContent = "Ranger Browser offline";
@@ -210,6 +248,7 @@
   themeMedia.addEventListener("change", (event) => {
     if (!hasSavedTheme()) setTheme(event.matches ? "dark" : "light");
   });
+  addEventListener("hashchange", handleViewerHash);
   setTheme(document.documentElement.dataset.theme || (themeMedia.matches ? "dark" : "light"));
   start();
 })();
