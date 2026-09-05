@@ -59,3 +59,11 @@
   url: https://mcclean.dev/
   avatar: L
   status: online
+
+- slug: zach
+  name: Zach Berry
+  handle: zachberry.com
+  url: https://zachberry.com/
+  description: Web Designer and Developer in Orlando, FL
+  avatar: Z
+  status: online
