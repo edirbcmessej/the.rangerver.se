@@ -34,7 +34,7 @@
     return rangers[(current + delta + rangers.length) % rangers.length];
   }
 
-  fetch("../data/rangers.json")
+  fetch("../data/rangers.json?v={{ASSET_VERSION}}")
     .then((response) => {
       if (!response.ok) throw new Error("Could not load Ranger data");
       return response.json();

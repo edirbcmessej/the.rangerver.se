@@ -87,8 +87,8 @@
   async function start() {
     try {
       const [siteResponse, rangerResponse] = await Promise.all([
-        fetch("./data/site.json"),
-        fetch("./data/rangers.json"),
+        fetch("./data/site.json?v={{ASSET_VERSION}}"),
+        fetch("./data/rangers.json?v={{ASSET_VERSION}}"),
       ]);
       if (!siteResponse.ok || !rangerResponse.ok) throw new Error("The generated data files could not be loaded.");
       [site, rangers] = await Promise.all([siteResponse.json(), rangerResponse.json()]);

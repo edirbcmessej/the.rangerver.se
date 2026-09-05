@@ -38,3 +38,13 @@
   tags: [software, music, games]
   avatar: J
   status: online
+
+- slug: thomas
+  name: Thomas
+  handle: thomasw.cool
+  url: https://thomasw.cool/
+  era: games · creative tools · weekends
+  description: Browser games, creative tools, pixel experiments, and notes built on nights and weekends.
+  tags: [games, creative tools, pixel art]
+  avatar: T
+  status: online
