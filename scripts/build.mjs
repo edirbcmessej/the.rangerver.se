@@ -23,7 +23,6 @@ const versionedSource = await Promise.all(
     "src/assets/app.js",
     "src/assets/redirect.css",
     "src/assets/redirect.js",
-    "src/assets/rangerverse-88x31.png",
     "src/assets/rangerverse-max.webp",
     "src/assets/rangerverse-max-transparent.webp",
     "src/assets/rangerverse-return.png",

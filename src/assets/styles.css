@@ -167,12 +167,6 @@ section { padding: 55px 0; scroll-margin-top: 24px; }
 .step h3 { margin: 2px 0 5px; }
 .step p { margin: 0; color: var(--muted); }
 .badges { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; margin-top: 34px; }
-.badge88, .footer-badge { display: block; line-height: 0; text-decoration: none; transition: transform .12s, filter .12s; }
-.badge88 { width: 176px; height: 62px; }
-.badge88 img { display: block; width: 176px; height: 62px; image-rendering: pixelated; }
-.footer-badge, .footer-badge img { width: 88px; height: 31px; }
-.footer-badge img { display: block; }
-.badge88:hover, .footer-badge:hover { transform: translateY(-2px); filter: brightness(1.12); }
 .mini { padding: 12px 15px; background: var(--surface); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--shadow); font: 900 12px "Courier New", monospace; transform: rotate(-2deg); }
 .notice { padding: 16px; background: var(--cream); border: 3px solid var(--ink); }
 
@@ -221,7 +215,6 @@ footer { margin-top: 60px; background: var(--footer-bg); color: var(--footer-ink
 .foot { display: flex; justify-content: space-between; gap: 30px; align-items: end; }
 .foot strong { font-size: 28px; }
 .foot p { color: var(--footer-muted); max-width: 520px; }
-.foot-signoff { display: grid; justify-items: end; gap: 14px; text-align: right; }
 .cursor { position: fixed; right: 28px; bottom: 26px; font-size: 38px; filter: drop-shadow(3px 4px 0 var(--gold)); transform: rotate(-18deg); pointer-events: none; animation: wiggle 2.2s ease-in-out infinite; z-index: 9; }
 
 @keyframes marquee { to { transform: translateX(-50%); } }
@@ -241,7 +234,6 @@ footer { margin-top: 60px; background: var(--footer-bg); color: var(--footer-ink
   .ring-portal strong { justify-self: start; font-size: 14px; }
   .ringcontrols { grid-template-columns: 1fr; }
   .foot { display: block; }
-  .foot-signoff { justify-items: start; margin-top: 24px; text-align: left; }
   .hero h1 { text-shadow: 3px 4px 0 var(--hero-highlight), 6px 7px 0 var(--ink); }
   .viewer-bar { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; }
   .viewer-nav { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); }
