@@ -8,6 +8,38 @@
   const cards = document.querySelector("#cards");
   const address = document.querySelector("#address");
   const hint = document.querySelector("#ringhint");
+  const themeToggle = document.querySelector("#theme-toggle");
+  const themeMedia = matchMedia("(prefers-color-scheme: dark)");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const viewer = document.querySelector("#ranger-viewer");
+  const viewerFrame = document.querySelector("#viewer-frame");
+  const viewerTitle = document.querySelector("#viewer-title");
+  const viewerUrl = document.querySelector("#viewer-url");
+  const viewerExternal = document.querySelector("#viewer-external");
+  let closeTimer;
+
+  function setTheme(theme, persist = false) {
+    document.documentElement.dataset.theme = theme;
+    const dark = theme === "dark";
+    themeToggle.setAttribute("aria-pressed", String(dark));
+    themeToggle.setAttribute("aria-label", `Use ${dark ? "light" : "dark"} mode`);
+    themeToggle.querySelector(".theme-icon").textContent = dark ? "☀" : "☾";
+    themeToggle.querySelector(".theme-label").textContent = dark ? "light" : "dark";
+    document.querySelector('meta[name="theme-color"]').content = dark ? "#071a28" : "#0797e3";
+    if (persist) {
+      try {
+        localStorage.setItem("rangerverse-theme", theme);
+      } catch {}
+    }
+  }
+
+  function hasSavedTheme() {
+    try {
+      return ["light", "dark"].includes(localStorage.getItem("rangerverse-theme"));
+    } catch {
+      return false;
+    }
+  }
 
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -21,7 +53,7 @@
     rangers.forEach((ranger, index) => {
       const card = el("button", "card");
       card.type = "button";
-      card.setAttribute("aria-label", `Select ${ranger.name} in the ring`);
+      card.setAttribute("aria-label", `Browse ${ranger.name}'s site in the Rangerverse viewer`);
 
       const status = el("i", "status");
       status.dataset.status = ranger.status;
@@ -34,7 +66,7 @@
       tags.append(...ranger.tags.map((tag) => el("span", "tag", tag)));
 
       card.append(status, avatar, heading, handle, description, tags);
-      card.addEventListener("click", () => select(index, true));
+      card.addEventListener("click", (event) => openViewer(index, event));
       fragment.append(card);
     });
     cards.replaceChildren(fragment);
@@ -66,6 +98,51 @@
       while (next === current) next = Math.floor(Math.random() * rangers.length);
     }
     select(next, scroll);
+  }
+
+  function loadViewer(index) {
+    current = (index + rangers.length) % rangers.length;
+    const ranger = rangers[current];
+    update();
+    viewer.classList.remove("is-loaded");
+    viewerTitle.textContent = ranger.name;
+    viewerUrl.textContent = ranger.url;
+    viewerExternal.href = ranger.url;
+    viewerExternal.setAttribute("aria-label", `Open ${ranger.name}'s site in a new tab`);
+    viewerFrame.title = `${ranger.name}'s site`;
+    viewerFrame.src = ranger.url;
+  }
+
+  function openViewer(index, event) {
+    if (!rangers.length) return;
+    clearTimeout(closeTimer);
+    const x = event?.clientX || window.innerWidth / 2;
+    const y = event?.clientY || window.innerHeight / 2;
+    viewer.style.setProperty("--bloom-x", `${x}px`);
+    viewer.style.setProperty("--bloom-y", `${y}px`);
+    loadViewer(index);
+    document.body.classList.add("viewer-open");
+    if (!viewer.open) viewer.showModal();
+    requestAnimationFrame(() => requestAnimationFrame(() => viewer.classList.add("is-open")));
+  }
+
+  function closeViewer() {
+    viewer.classList.remove("is-open");
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => {
+      viewer.close();
+      viewer.classList.remove("is-loaded");
+      viewerFrame.removeAttribute("src");
+      document.body.classList.remove("viewer-open");
+    }, reducedMotion.matches ? 0 : 360);
+  }
+
+  function randomViewerRanger() {
+    let next = current;
+    if (rangers.length > 1) {
+      while (next === current) next = Math.floor(Math.random() * rangers.length);
+    }
+    loadViewer(next);
   }
 
   function configureJoin() {
@@ -106,5 +183,25 @@
   document.querySelector("#next-ranger").addEventListener("click", () => step(1));
   document.querySelector("#random-ranger").addEventListener("click", () => randomRanger(false));
   document.querySelector("#enter-ring").addEventListener("click", () => randomRanger(true));
+  address.addEventListener("click", (event) => {
+    event.preventDefault();
+    openViewer(current, event);
+  });
+  document.querySelector("#viewer-close").addEventListener("click", closeViewer);
+  document.querySelector("#viewer-previous").addEventListener("click", () => loadViewer(current - 1));
+  document.querySelector("#viewer-next").addEventListener("click", () => loadViewer(current + 1));
+  document.querySelector("#viewer-random").addEventListener("click", randomViewerRanger);
+  viewerFrame.addEventListener("load", () => viewer.classList.add("is-loaded"));
+  viewer.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeViewer();
+  });
+  themeToggle.addEventListener("click", () => {
+    setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
+  });
+  themeMedia.addEventListener("change", (event) => {
+    if (!hasSavedTheme()) setTheme(event.matches ? "dark" : "light");
+  });
+  setTheme(document.documentElement.dataset.theme || (themeMedia.matches ? "dark" : "light"));
   start();
 })();

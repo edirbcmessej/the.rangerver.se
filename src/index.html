@@ -11,6 +11,18 @@
     <meta property="og:url" content="{{CANONICAL_URL}}">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="{{CANONICAL_URL}}">
+    <script>
+      (() => {
+        try {
+          const saved = localStorage.getItem("rangerverse-theme");
+          const theme = saved === "light" || saved === "dark"
+            ? saved
+            : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.dataset.theme = theme;
+          document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#071a28" : "#0797e3";
+        } catch {}
+      })();
+    </script>
     <script type="text/plain" id="rangerverse-source-easter-egg">
 howdy pardner, wanna join the club?
 
@@ -82,12 +94,18 @@ howdy pardner, wanna join the club?
     <div class="topbar"></div>
 
     <header class="wrap">
-      <nav aria-label="Primary navigation">
+      <nav class="site-nav" aria-label="Primary navigation">
         <a class="brand pixel" href="#"><span>the</span> rangerver.se</a>
-        <div class="navlinks">
-          <a href="#ring">enter ring</a>
-          <a href="#directory">directory</a>
-          <a href="#join">join</a>
+        <div class="nav-actions">
+          <div class="navlinks">
+            <a href="#ring">enter ring</a>
+            <a href="#directory">directory</a>
+            <a href="#join">join</a>
+          </div>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Use dark mode" aria-pressed="false">
+            <span class="theme-icon" aria-hidden="true">☾</span>
+            <span class="theme-label">dark</span>
+          </button>
         </div>
       </nav>
     </header>
@@ -176,6 +194,28 @@ howdy pardner, wanna join the club?
         </div>
       </section>
     </main>
+
+    <dialog class="ranger-viewer" id="ranger-viewer" aria-labelledby="viewer-title">
+      <div class="viewer-shell">
+        <header class="viewer-bar">
+          <button class="viewer-button viewer-close" id="viewer-close" type="button" aria-label="Close Ranger site">×</button>
+          <div class="viewer-identity">
+            <strong id="viewer-title">Ranger site</strong>
+            <span id="viewer-url">Loading…</span>
+          </div>
+          <nav class="viewer-nav" aria-label="Browse the Rangerverse">
+            <button class="viewer-button" id="viewer-previous" type="button" aria-label="Previous Ranger">← <span>prev</span></button>
+            <button class="viewer-button viewer-random" id="viewer-random" type="button" aria-label="Random Ranger">✦ <span>random</span></button>
+            <button class="viewer-button" id="viewer-next" type="button" aria-label="Next Ranger"><span>next</span> →</button>
+            <a class="viewer-button" id="viewer-external" href="#" target="_blank" rel="noopener" aria-label="Open Ranger site in a new tab">↗ <span>open</span></a>
+          </nav>
+        </header>
+        <div class="viewer-stage">
+          <div class="viewer-loading" role="status"><b>✦</b><span>tuning into the Rangerverse…</span></div>
+          <iframe id="viewer-frame" title="Ranger site" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        </div>
+      </div>
+    </dialog>
 
     <footer>
       <div class="wrap foot">

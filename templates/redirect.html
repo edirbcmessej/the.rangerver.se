@@ -4,6 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex">
+    <script>
+      try {
+        const saved = localStorage.getItem("rangerverse-theme");
+        document.documentElement.dataset.theme = saved === "light" || saved === "dark"
+          ? saved
+          : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      } catch {}
+    </script>
     <title>{{TITLE}}</title>
     <link rel="stylesheet" href="../assets/redirect.css?v={{ASSET_VERSION}}">
   </head>
