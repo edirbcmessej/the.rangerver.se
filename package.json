@@ -1,0 +1,20 @@
+{
+  "name": "rangerverse",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A hand-built Techrangers webring.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs && node --test",
+    "dev": "node scripts/dev.mjs",
+    "preview": "node scripts/serve.mjs dist",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "yaml": "^2.8.1"
+  }
+}

@@ -1,0 +1,19 @@
+# Site-wide words and links. Changes publish automatically after they land on main.
+title: the rangerver.se — Techrangers webring
+description: A hand-built trail between the personal sites, projects, blogs, experiments, and strange little internet corners made by Techrangers.
+canonical_url: https://the.rangerver.se
+cname: the.rangerver.se
+
+# Repository and join-request issue form.
+repository_url: https://github.com/edirbcmessej/the.rangerver.se
+
+submission_url: https://github.com/edirbcmessej/the.rangerver.se/issues/new?template=join.yml
+
+eyebrow: EST. BY RANGERS · FOREVER BETA
+footer_note: UCF-ish · ORLANDO-ish · INTERNET FOREVER ✦
+
+ticker:
+  - "★ RING STATUS: ONLINE"
+  - "{count} RANGERS CONNECTED"
+  - "NO ALGORITHM · JUST LINKS"
+  - "VIEW SOURCE, YOU COWARD"

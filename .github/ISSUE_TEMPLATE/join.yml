@@ -1,0 +1,66 @@
+name: Join the Rangerverse
+description: Submit a personal site for the webring
+title: "Join: "
+labels: [ring-application]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for sending up a flare. Fill this out and a maintainer will add your YAML entry.
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      placeholder: Ada
+    validations:
+      required: true
+
+  - type: input
+    id: handle
+    attributes:
+      label: Handle
+      placeholder: "@ada"
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Site URL
+      placeholder: https://ada.example
+    validations:
+      required: true
+
+  - type: input
+    id: era
+    attributes:
+      label: Ranger era
+      placeholder: systems · 2024
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: One-sentence description
+      description: Keep it under 240 characters.
+      placeholder: Notes, experiments, and useful little tools.
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: One to six, separated by commas.
+      placeholder: systems, web, music
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: controls
+    attributes:
+      label: Ring controls
+      options:
+        - label: I will add the previous, random, and next Ranger links to my site.
+          required: true

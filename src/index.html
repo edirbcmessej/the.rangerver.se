@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{DESCRIPTION}}">
+    <meta name="theme-color" content="#0797e3">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{TITLE}}">
+    <meta property="og:description" content="{{DESCRIPTION}}">
+    <meta property="og:url" content="{{CANONICAL_URL}}">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="{{CANONICAL_URL}}">
+    <link rel="stylesheet" href="./assets/styles.css">
+    <title>{{TITLE}}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="topbar"></div>
+
+    <header class="wrap">
+      <nav aria-label="Primary navigation">
+        <a class="brand pixel" href="#"><span>the</span> rangerver.se</a>
+        <div class="navlinks">
+          <a href="#ring">enter ring</a>
+          <a href="#directory">directory</a>
+          <a href="#join">join</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="wrap hero">
+        <div>
+          <div class="eyebrow">{{EYEBROW}}</div>
+          <h1>ranger<br>ver.se<small>the Techrangers webring</small></h1>
+          <p>{{DESCRIPTION}}</p>
+          <div class="buttons">
+            <button class="btn primary" id="enter-ring" type="button">✦ enter the ring</button>
+            <a class="btn" href="#join">+ add your site</a>
+          </div>
+        </div>
+
+        <div class="orbit" aria-hidden="true">
+          <div class="planet"></div>
+          <div class="core">✦</div>
+          <div id="orbit-nodes"></div>
+        </div>
+      </div>
+
+      <div class="ticker" aria-label="Ring status">
+        <div>{{TICKER}}</div>
+      </div>
+
+      <section id="ring">
+        <div class="wrap">
+          <h2 class="section-title">take a lap.</h2>
+          <p class="lede">Every site points to another Ranger. No feed. No ranking. No engagement score. Just the old internet trick of finding something because a person you know pointed at it.</p>
+          <div class="ringbox">
+            <div class="browserbar">
+              <span class="window-dots" aria-hidden="true"><i class="dot"></i><i class="dot"></i><i class="dot"></i></span>
+              <a class="address" id="address" href="#directory">Loading the ring…</a>
+            </div>
+            <div class="ringcontrols">
+              <button class="btn" id="previous-ranger" type="button">← previous ranger</button>
+              <button class="btn random" id="random-ranger" type="button">✦ RANDOM RANGER ✦</button>
+              <button class="btn" id="next-ranger" type="button">next ranger →</button>
+            </div>
+            <p class="hint" id="ringhint" aria-live="polite">Warming up the orbit…</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="directory">
+        <div class="wrap">
+          <h2 class="section-title">who's out there?</h2>
+          <p class="lede">The crew and their corners of the web. Pick a card and go see what they made.</p>
+          <div class="grid" id="cards" aria-live="polite">
+            <p>Calling the Rangers…</p>
+          </div>
+          <noscript><p class="notice">The directory needs JavaScript to load its YAML-built member list.</p></noscript>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap split">
+          <div class="blob">
+            <div class="bigcopy">Techrangers built things that <b>real people actually used.</b><br><br>The Rangerverse is where we keep building after the ticket closes.</div>
+          </div>
+          <div>
+            <h2 class="section-title">the web was better with neighbors.</h2>
+            <p class="lede">A webring is a tiny pact between websites: each one links forward, backward, and somewhere random. Together they form a trail you can wander instead of a timeline you have to consume.</p>
+            <div class="badges">
+              <div class="badge88" aria-label="Rangerverse"><i>↻</i><span>RANGER<br>VER.SE</span></div>
+              <div class="mini">HUMAN CURATED ✓</div>
+              <div class="mini">BEST VIEWED ONLINE</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="join">
+        <div class="wrap split">
+          <div>
+            <h2 class="section-title">join the ring.</h2>
+            <div class="step"><span class="num">1</span><div><h3>Have a corner of the internet.</h3><p>Portfolio, blog, toy, wiki, weird experiment. Personal is better than polished.</p></div></div>
+            <div class="step"><span class="num">2</span><div><h3>Add the ring controls.</h3><p>Put the tiny snippet somewhere visitors can find it.</p></div></div>
+            <div class="step"><span class="num">3</span><div><h3>Send up a flare.</h3><p>Submit your URL, handle, Ranger era, and whatever you want people to know.</p></div></div>
+            <a class="btn primary" id="submit-site" href="#join">+ submit my site</a>
+          </div>
+          <div>
+            <div class="eyebrow">COPY / PASTE THIS</div>
+            <pre class="code"><code id="ring-snippet">Loading snippet…</code></pre>
+            <p class="snippet-note">Replace <code>YOUR_SLUG</code> with the slug assigned to you in <code>data/rangers.yml</code>.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap foot">
+        <div>
+          <strong class="pixel">the rangerver.se</strong>
+          <p>Made by Rangers, for Rangers, on the part of the internet where people still make their own websites.</p>
+        </div>
+        <div class="pixel">{{FOOTER_NOTE}}</div>
+      </div>
+    </footer>
+
+    <div class="cursor" aria-hidden="true">➤</div>
+    <script src="./assets/app.js"></script>
+  </body>
+</html>

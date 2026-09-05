@@ -1,0 +1,61 @@
+# Add a Ranger by copying one complete block. `slug` and `url` must be unique.
+# Replace these demo URLs as the real crew joins.
+- slug: jesse
+  name: Jesse
+  handle: "@jesse"
+  url: https://jesse.example.com
+  era: systems · music · odd web
+  description: Software, songs, games, and whatever else escaped the projects folder.
+  tags: [engineering, music, games]
+  avatar: J
+  status: demo
+
+- slug: maya
+  name: Maya
+  handle: "@maya"
+  url: https://maya.example.com
+  era: design · 2024
+  description: Interfaces, tiny tools, visual experiments, and notes from the design cave.
+  tags: [design, ux, art]
+  avatar: M
+  status: demo
+
+- slug: devon
+  name: Devon
+  handle: "@devon"
+  url: https://devon.example.com
+  era: infra · 2023
+  description: Home lab notes, cloud mistakes, useful scripts, and questionable uptime.
+  tags: [infra, cloud, linux]
+  avatar: D
+  status: demo
+
+- slug: ari
+  name: Ari
+  handle: "@ari"
+  url: https://ari.example.com
+  era: research · 2025
+  description: Things learned by asking students what actually works.
+  tags: [research, learning, data]
+  avatar: A
+  status: demo
+
+- slug: sam
+  name: Sam
+  handle: "@sam"
+  url: https://sam.example.com
+  era: frontend · 2022
+  description: Small joyful websites with an unreasonable amount of CSS.
+  tags: [frontend, web, css]
+  avatar: S
+  status: demo
+
+- slug: nico
+  name: Nico
+  handle: "@nico"
+  url: https://nico.example.com
+  era: data · 2021
+  description: Charts, maps, notebooks, and experiments involving too many CSVs.
+  tags: [data, maps, python]
+  avatar: N
+  status: demo
