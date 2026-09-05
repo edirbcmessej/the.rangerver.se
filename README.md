@@ -26,15 +26,15 @@ That member puts this on their own site, replacing `ada` with their slug:
 
 ```html
 <nav class="rangerverse">
-  <a href="https://the.rangerver.se/prev?from=ada">← prev</a>
-  <a href="https://the.rangerver.se/random?from=ada">✦ rangerverse</a>
-  <a href="https://the.rangerver.se/next?from=ada">next →</a>
+  <a href="https://edirbcmessej.github.io/the.rangerver.se/prev?from=ada">← prev</a>
+  <a href="https://edirbcmessej.github.io/the.rangerver.se/random?from=ada">✦ rangerverse</a>
+  <a href="https://edirbcmessej.github.io/the.rangerver.se/next?from=ada">next →</a>
 </nav>
 ```
 
 The redirect pages also try to identify members from the referring domain, but `?from=slug` is explicit and more reliable.
 
-The dedicated portal at `https://the.rangerver.se/portal/` opens a random Ranger inside the full-screen browser. Link to a specific Ranger with their slug, for example `https://the.rangerver.se/portal/?ranger=ada`. Moving between Rangers keeps that URL synchronized.
+The dedicated portal at `https://edirbcmessej.github.io/the.rangerver.se/portal/` opens a random Ranger inside the full-screen browser. Link to a specific Ranger with their slug, for example `https://edirbcmessej.github.io/the.rangerver.se/portal/?ranger=ada`. Moving between Rangers keeps that URL synchronized.
 
 ## Change site copy or links
 
@@ -77,7 +77,7 @@ Never edit `dist/`; it is generated and intentionally ignored.
 
 Pull requests run the same validation and build without publishing. Merges to `main` deploy automatically.
 
-The default custom domain is `the.rangerver.se`. Add the DNS records GitHub shows under Pages settings, then enable **Enforce HTTPS** after the certificate is ready. If you want the normal `github.io` address instead, set `cname: ""` and change `canonical_url` in `data/site.yml`.
+The site currently publishes at `https://edirbcmessej.github.io/the.rangerver.se/`. To restore `the.rangerver.se`, add the DNS records GitHub shows under Pages settings, enable **Enforce HTTPS** after the certificate is ready, then set `cname` and `canonical_url` in `data/site.yml` back to the custom domain.
 
 The workflow follows GitHub's current Pages artifact/deployment pattern, with build and deploy separated and the deploy job restricted to the `github-pages` environment. Dependabot checks the npm package and GitHub Actions versions weekly.
 
