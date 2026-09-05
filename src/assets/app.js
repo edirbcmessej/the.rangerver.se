@@ -16,21 +16,12 @@
     return node;
   };
 
-  function renderOrbit() {
-    const container = document.querySelector("#orbit-nodes");
-    const names = rangers.slice(0, 3).map((ranger) => `${ranger.name.toUpperCase()}.HTML`);
-    names.push("YOU?");
-    container.replaceChildren(...names.map((name) => el("div", "node", name)));
-  }
-
   function renderCards() {
     const fragment = document.createDocumentFragment();
-    rangers.forEach((ranger) => {
-      const card = el("a", "card");
-      card.href = ranger.url;
-      card.target = "_blank";
-      card.rel = "noopener";
-      card.setAttribute("aria-label", `Visit ${ranger.name}'s site`);
+    rangers.forEach((ranger, index) => {
+      const card = el("button", "card");
+      card.type = "button";
+      card.setAttribute("aria-label", `Select ${ranger.name} in the ring`);
 
       const status = el("i", "status");
       status.dataset.status = ranger.status;
@@ -41,12 +32,9 @@
       const description = el("p", "", ranger.description);
       const tags = el("div", "tags");
       tags.append(...ranger.tags.map((tag) => el("span", "tag", tag)));
-      const arrow = el("span", "card-arrow", "↗");
-      arrow.setAttribute("aria-hidden", "true");
 
-      card.append(status, avatar, heading, handle, description, tags, arrow);
-      card.addEventListener("mouseenter", () => select(rangers.indexOf(ranger), false));
-      card.addEventListener("focus", () => select(rangers.indexOf(ranger), false));
+      card.append(status, avatar, heading, handle, description, tags);
+      card.addEventListener("click", () => select(index, true));
       fragment.append(card);
     });
     cards.replaceChildren(fragment);
@@ -104,7 +92,6 @@
       ]);
       if (!siteResponse.ok || !rangerResponse.ok) throw new Error("The generated data files could not be loaded.");
       [site, rangers] = await Promise.all([siteResponse.json(), rangerResponse.json()]);
-      renderOrbit();
       renderCards();
       configureJoin();
       update();

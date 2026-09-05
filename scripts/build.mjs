@@ -21,6 +21,8 @@ const tickerItems = site.ticker.map((item) => item.replaceAll("{count}", String(
 const tickerMarkup = [...tickerItems, ...tickerItems]
   .map((item) => `<span>${escapeHtml(item)}</span>`)
   .join("");
+const countWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+const countWord = countWords[rangers.length] || String(rangers.length);
 
 const replacements = {
   "{{TITLE}}": escapeHtml(site.title),
@@ -29,6 +31,8 @@ const replacements = {
   "{{EYEBROW}}": escapeHtml(site.eyebrow),
   "{{FOOTER_NOTE}}": escapeHtml(site.footer_note),
   "{{RANGER_COUNT}}": String(rangers.length),
+  "{{RANGER_COUNT_WORD}}": countWord,
+  "{{RANGER_COUNT_WORD_TITLE}}": countWord[0].toUpperCase() + countWord.slice(1),
   "{{TICKER}}": tickerMarkup,
 };
 
