@@ -45,3 +45,17 @@
   tags: [games, creative tools, pixel art]
   avatar: T
   status: online
+
+- slug: conner
+  name: Conner
+  handle: savvydolphin77.github.io
+  url: https://savvydolphin77.github.io/home.html
+  avatar: C
+  status: online
+
+- slug: lucas
+  name: Lucas
+  handle: mcclean.dev
+  url: https://mcclean.dev/
+  avatar: L
+  status: online
