@@ -30,13 +30,13 @@ html[data-theme="dark"] {
   --ink: #dff5ff;
   --blue: #57c7ff;
   --gold: #ffd34d;
-  --cream: #173b4c;
-  --muted: #abc5d1;
+  --cream: #19485c;
+  --muted: #d0e7f0;
   --green: #35d886;
   --pink: #ff87a5;
   --surface: #0d2b3d;
-  --surface-soft: #14394b;
-  --pattern: #12384b;
+  --surface-soft: #194357;
+  --pattern: #19465b;
   --shadow: #020c13;
   --shadow-strong: #01080d;
   --hero-highlight: #0d2b3d;
@@ -46,7 +46,7 @@ html[data-theme="dark"] {
   --code-ink: #dff5ff;
   --footer-bg: #020d14;
   --footer-ink: #effaff;
-  --footer-muted: #abc5d1;
+  --footer-muted: #c9e1eb;
   --topbar-mid: #1ba9ed;
 }
 
@@ -96,8 +96,7 @@ body.viewer-open { overflow: hidden; }
 .btn[aria-disabled="true"] { opacity: .72; cursor: not-allowed; }
 
 .hero-art { margin: 0; display: grid; place-items: center; }
-.hero-art img { display: block; width: min(100%, 520px); height: auto; transition: filter .2s; }
-html[data-theme="dark"] .hero-art img { filter: invert(.88) hue-rotate(180deg) saturate(1.25) contrast(1.08); }
+.hero-art img { display: block; width: min(100%, 520px); height: auto; }
 
 section { padding: 55px 0; scroll-margin-top: 24px; }
 .section-title { font-size: clamp(40px, 6vw, 72px); letter-spacing: -.055em; line-height: .95; margin: 0 0 20px; color: var(--blue); }
@@ -144,8 +143,9 @@ section { padding: 55px 0; scroll-margin-top: 24px; }
 .step h3 { margin: 2px 0 5px; }
 .step p { margin: 0; color: var(--muted); }
 .badges { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; margin-top: 34px; }
-.badge88 { width: 176px; height: 62px; background: var(--blue); border: 4px solid var(--ink); box-shadow: 5px 5px 0 var(--shadow); display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--on-blue); font: 900 13px "Courier New", monospace; text-align: center; }
-.badge88 i { font-style: normal; font-size: 28px; }
+.badge88, .footer-badge { display: block; width: 88px; height: 31px; line-height: 0; text-decoration: none; transition: transform .12s, filter .12s; }
+.badge88 img, .footer-badge img { display: block; width: 88px; height: 31px; }
+.badge88:hover, .footer-badge:hover { transform: translateY(-2px); filter: brightness(1.12); }
 .mini { padding: 12px 15px; background: var(--surface); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--shadow); font: 900 12px "Courier New", monospace; transform: rotate(-2deg); }
 .notice { padding: 16px; background: var(--cream); border: 3px solid var(--ink); }
 
@@ -192,6 +192,7 @@ footer { margin-top: 60px; background: var(--footer-bg); color: var(--footer-ink
 .foot { display: flex; justify-content: space-between; gap: 30px; align-items: end; }
 .foot strong { font-size: 28px; }
 .foot p { color: var(--footer-muted); max-width: 520px; }
+.foot-signoff { display: grid; justify-items: end; gap: 14px; text-align: right; }
 .cursor { position: fixed; right: 28px; bottom: 26px; font-size: 38px; filter: drop-shadow(3px 4px 0 var(--gold)); transform: rotate(-18deg); pointer-events: none; animation: wiggle 2.2s ease-in-out infinite; z-index: 9; }
 
 @keyframes marquee { to { transform: translateX(-50%); } }
@@ -204,6 +205,7 @@ footer { margin-top: 60px; background: var(--footer-bg); color: var(--footer-ink
   .grid, .split { grid-template-columns: 1fr; }
   .ringcontrols { grid-template-columns: 1fr; }
   .foot { display: block; }
+  .foot-signoff { justify-items: start; margin-top: 24px; text-align: left; }
   .hero h1 { text-shadow: 3px 4px 0 var(--hero-highlight), 6px 7px 0 var(--ink); }
   .viewer-bar { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; }
   .viewer-nav { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); }

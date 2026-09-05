@@ -16,6 +16,7 @@
   const viewerTitle = document.querySelector("#viewer-title");
   const viewerUrl = document.querySelector("#viewer-url");
   const viewerExternal = document.querySelector("#viewer-external");
+  const heroArt = document.querySelector("#hero-art");
   let closeTimer;
 
   function setTheme(theme, persist = false) {
@@ -26,6 +27,8 @@
     themeToggle.querySelector(".theme-icon").textContent = dark ? "☀" : "☾";
     themeToggle.querySelector(".theme-label").textContent = dark ? "light" : "dark";
     document.querySelector('meta[name="theme-color"]').content = dark ? "#071a28" : "#0797e3";
+    const artSource = dark ? heroArt.dataset.darkSrc : heroArt.dataset.lightSrc;
+    if (heroArt.getAttribute("src") !== artSource) heroArt.src = artSource;
     if (persist) {
       try {
         localStorage.setItem("rangerverse-theme", theme);
@@ -92,12 +95,12 @@
     select(current + direction, false);
   }
 
-  function randomRanger(scroll = true) {
+  function randomIndex() {
     let next = current;
     if (rangers.length > 1) {
       while (next === current) next = Math.floor(Math.random() * rangers.length);
     }
-    select(next, scroll);
+    return next;
   }
 
   function loadViewer(index) {
@@ -137,13 +140,11 @@
     }, reducedMotion.matches ? 0 : 360);
   }
 
-  function randomViewerRanger() {
-    let next = current;
-    if (rangers.length > 1) {
-      while (next === current) next = Math.floor(Math.random() * rangers.length);
-    }
-    loadViewer(next);
+  function openRandomViewer(event) {
+    openViewer(randomIndex(), event);
   }
+
+  function randomViewerRanger() { loadViewer(randomIndex()); }
 
   function configureJoin() {
     const submit = document.querySelector("#submit-site");
@@ -181,8 +182,8 @@
 
   document.querySelector("#previous-ranger").addEventListener("click", () => step(-1));
   document.querySelector("#next-ranger").addEventListener("click", () => step(1));
-  document.querySelector("#random-ranger").addEventListener("click", () => randomRanger(false));
-  document.querySelector("#enter-ring").addEventListener("click", () => randomRanger(true));
+  document.querySelector("#random-ranger").addEventListener("click", openRandomViewer);
+  document.querySelector("#enter-ring").addEventListener("click", openRandomViewer);
   address.addEventListener("click", (event) => {
     event.preventDefault();
     openViewer(current, event);

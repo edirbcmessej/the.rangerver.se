@@ -32,6 +32,14 @@ That member puts this on their own site, replacing `ada` with their slug:
 
 The redirect pages also try to identify members from the referring domain, but `?from=slug` is explicit and more reliable.
 
+For a compact link back to the ring, use the real 88×31 badge:
+
+```html
+<a href="https://the.rangerver.se/">
+  <img src="https://the.rangerver.se/assets/rangerverse-88x31.png" width="88" height="31" alt="The Rangerverse">
+</a>
+```
+
 ## Change site copy or links
 
 Edit [`data/site.yml`](data/site.yml). This controls the title, description, ticker, custom domain, submission link, and footer note.
