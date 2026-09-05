@@ -15,7 +15,8 @@
   --shadow-strong: #b9bab4;
   --hero-highlight: #fff;
   --link: #1168b7;
-  --on-blue: #fff;
+  --on-blue: #032235;
+  --on-gold: #07344f;
   --code-bg: #092f46;
   --code-ink: #dff5ff;
   --footer-bg: #07344f;
@@ -42,6 +43,7 @@ html[data-theme="dark"] {
   --hero-highlight: #0d2b3d;
   --link: #7bd3ff;
   --on-blue: #032235;
+  --on-gold: #07344f;
   --code-bg: #020d14;
   --code-ink: #dff5ff;
   --footer-bg: #020d14;
@@ -85,13 +87,13 @@ body.viewer-open { overflow: hidden; }
 .theme-icon { width: 1em; font-size: 16px; line-height: 1; }
 
 .hero { min-height: 570px; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 56px; padding: 38px 0 55px; }
-.eyebrow { display: inline-block; background: var(--gold); padding: 7px 12px; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); font: 900 13px "Courier New", monospace; transform: rotate(-2deg); margin-bottom: 26px; }
+.eyebrow { display: inline-block; color: var(--on-gold); background: var(--gold); padding: 7px 12px; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); font: 900 13px "Courier New", monospace; transform: rotate(-2deg); margin-bottom: 26px; }
 .hero h1 { font-size: clamp(66px, 9vw, 126px); line-height: .77; margin: 0; letter-spacing: -.08em; color: var(--blue); text-shadow: 5px 6px 0 var(--hero-highlight), 9px 10px 0 var(--ink); }
 .hero h1 small { display: block; color: var(--ink); font-size: .35em; letter-spacing: -.04em; margin: 26px 0 0; text-shadow: none; }
 .hero p { font-size: 22px; line-height: 1.45; color: var(--muted); max-width: 650px; margin: 34px 0; }
 .buttons { display: flex; gap: 14px; flex-wrap: wrap; }
 .btn { appearance: none; border: 3px solid var(--ink); padding: 14px 18px; background: var(--surface); color: var(--ink); font: 900 15px "Courier New", monospace; box-shadow: 5px 5px 0 var(--ink); cursor: pointer; text-decoration: none; transition: transform .12s, box-shadow .12s, background-color .2s; }
-.btn.primary { background: var(--gold); }
+.btn.primary { color: var(--on-gold); background: var(--gold); }
 .btn:hover { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--ink); }
 .btn[aria-disabled="true"] { opacity: .72; cursor: not-allowed; }
 
@@ -101,7 +103,7 @@ body.viewer-open { overflow: hidden; }
 section { padding: 55px 0; scroll-margin-top: 24px; }
 .section-title { font-size: clamp(40px, 6vw, 72px); letter-spacing: -.055em; line-height: .95; margin: 0 0 20px; color: var(--blue); }
 .lede { font-size: 20px; color: var(--muted); max-width: 720px; line-height: 1.5; }
-.ticker { border-block: 4px solid var(--ink); background: var(--gold); overflow: hidden; padding: 10px 0; white-space: nowrap; font: 900 14px "Courier New", monospace; }
+.ticker { color: var(--on-gold); border-block: 4px solid var(--ink); background: var(--gold); overflow: hidden; padding: 10px 0; white-space: nowrap; font: 900 14px "Courier New", monospace; }
 .ticker div { display: inline-block; animation: marquee 22s linear infinite; }
 .ticker span { margin-right: 45px; }
 
@@ -139,7 +141,7 @@ section { padding: 55px 0; scroll-margin-top: 24px; }
 .snippet-note { margin-top: 18px; color: var(--muted); font-size: 14px; line-height: 1.5; }
 .snippet-note code { font-weight: 900; color: var(--ink); }
 .step { display: flex; gap: 18px; margin: 24px 0; align-items: flex-start; }
-.num { flex: none; width: 40px; height: 40px; display: grid; place-items: center; background: var(--gold); border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); font: 900 17px "Courier New", monospace; }
+.num { flex: none; width: 40px; height: 40px; display: grid; place-items: center; color: var(--on-gold); background: var(--gold); border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); font: 900 17px "Courier New", monospace; }
 .step h3 { margin: 2px 0 5px; }
 .step p { margin: 0; color: var(--muted); }
 .badges { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; margin-top: 34px; }
@@ -172,14 +174,14 @@ section { padding: 55px 0; scroll-margin-top: 24px; }
 .ranger-viewer.is-open { opacity: 1; transform: scale(1); clip-path: circle(150vmax at var(--bloom-x, 50vw) var(--bloom-y, 50vh)); }
 .ranger-viewer::backdrop { background: rgb(2 13 20 / 72%); backdrop-filter: blur(8px); }
 .viewer-shell { min-width: 0; min-height: 0; display: grid; grid-template-rows: auto 1fr; background: var(--paper); }
-.viewer-bar { min-width: 0; display: flex; align-items: center; gap: 14px; padding: 12px 14px; color: var(--ink); background: var(--gold); border-bottom: 4px solid var(--ink); box-shadow: 0 5px 0 var(--shadow); z-index: 2; }
+.viewer-bar { min-width: 0; display: flex; align-items: center; gap: 14px; padding: 12px 14px; color: var(--on-gold); background: var(--gold); border-bottom: 4px solid var(--ink); box-shadow: 0 5px 0 var(--shadow); z-index: 2; }
 .viewer-identity { min-width: 0; flex: 1; display: grid; gap: 2px; }
 .viewer-identity strong { font: 900 15px "Courier New", monospace; }
 .viewer-identity span { overflow: hidden; color: #334b59; font: 700 11px "Courier New", monospace; text-overflow: ellipsis; white-space: nowrap; }
 .viewer-nav { display: flex; align-items: stretch; gap: 8px; }
 .viewer-button { appearance: none; display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 38px; padding: 7px 10px; color: var(--ink); background: var(--surface); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); font: 900 11px "Courier New", monospace; text-decoration: none; text-transform: uppercase; cursor: pointer; transition: transform .12s, box-shadow .12s, background-color .2s; }
 .viewer-button:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
-.viewer-close { flex: none; width: 40px; padding: 0; color: var(--ink); background: var(--pink); font-size: 25px; line-height: 1; }
+.viewer-close { flex: none; width: 40px; padding: 0; color: var(--on-gold); background: var(--pink); font-size: 25px; line-height: 1; }
 .viewer-random { background: var(--blue); color: var(--on-blue); }
 .viewer-stage { position: relative; min-width: 0; min-height: 0; background: var(--surface); }
 .viewer-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--surface); border: 0; opacity: 0; transition: opacity .25s ease; }
