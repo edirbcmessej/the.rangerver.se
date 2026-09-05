@@ -90,8 +90,8 @@ export function validateRangers(value, file = "data/rangers.yml") {
     const tags = Array.isArray(entry.tags)
       ? entry.tags.map((tag, tagIndex) => text(tag, `${at}.tags[${tagIndex}]`, problems, { max: 24 }))
       : [];
-    if (!Array.isArray(entry.tags) || entry.tags.length === 0 || entry.tags.length > 6) {
-      problems.push(`${at}.tags must contain 1–6 tags`);
+    if (entry.tags !== undefined && (!Array.isArray(entry.tags) || entry.tags.length > 6)) {
+      problems.push(`${at}.tags must contain no more than 6 tags`);
     }
 
     const status = text(entry.status, `${at}.status`, problems, { max: 10 });
@@ -102,8 +102,8 @@ export function validateRangers(value, file = "data/rangers.yml") {
       name: text(entry.name, `${at}.name`, problems, { max: 60 }),
       handle: text(entry.handle, `${at}.handle`, problems, { max: 60 }),
       url,
-      era: text(entry.era, `${at}.era`, problems, { max: 100 }),
-      description: text(entry.description, `${at}.description`, problems, { max: 240 }),
+      era: text(entry.era, `${at}.era`, problems, { max: 100, optional: true }),
+      description: text(entry.description, `${at}.description`, problems, { max: 240, optional: true }),
       tags,
       avatar: text(entry.avatar, `${at}.avatar`, problems, { max: 8 }),
       status,

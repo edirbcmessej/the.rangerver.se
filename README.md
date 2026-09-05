@@ -20,6 +20,8 @@ Open [`data/rangers.yml`](data/rangers.yml), copy one complete block, and change
 
 `slug` is the member's permanent ring ID. It must be unique, lowercase, and use only letters, numbers, and hyphens. `status` can be `online`, `away`, `offline`, or `demo`.
 
+`era`, `description`, and `tags` are optional. Only add profile copy that the Ranger supplied; never infer or invent personal descriptions or labels from their website.
+
 That member puts this on their own site, replacing `ada` with their slug:
 
 ```html

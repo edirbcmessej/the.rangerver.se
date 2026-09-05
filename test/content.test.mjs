@@ -18,6 +18,18 @@ test("accepts a complete Ranger", () => {
   assert.deepEqual(validateRangers([ranger]), [ranger]);
 });
 
+test("accepts a Ranger without invented profile copy", () => {
+  const minimal = {
+    slug: "shea",
+    name: "Shea",
+    handle: "sheasilverman.com",
+    url: "https://sheasilverman.com/",
+    avatar: "S",
+    status: "online",
+  };
+  assert.deepEqual(validateRangers([minimal]), [{ ...minimal, era: "", description: "", tags: [] }]);
+});
+
 test("rejects duplicate slugs", () => {
   assert.throws(() => validateRangers([ranger, { ...ranger, url: "https://second.example" }]), /duplicates/);
 });

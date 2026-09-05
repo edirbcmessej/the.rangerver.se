@@ -140,12 +140,31 @@ howdy pardner, wanna join the club?
               <span class="window-dots" aria-hidden="true"><i class="dot"></i><i class="dot"></i><i class="dot"></i></span>
               <a class="address" id="address" href="#directory">Loading the ring…</a>
             </div>
+            <div class="ring-screen" id="ring-screen">
+              <div class="ring-portal" aria-hidden="true">
+                <img src="./assets/rangerverse-return.png?v={{ASSET_VERSION}}" width="128" height="128" alt="">
+                <strong>RANGER BROWSER</strong>
+              </div>
+              <article class="ring-preview" aria-live="polite">
+                <div class="ring-kicker"><i class="ring-status" id="preview-status"></i> SIGNAL LOCKED · NOW ORBITING</div>
+                <div class="ring-person">
+                  <div class="avatar ring-avatar" id="preview-avatar">✦</div>
+                  <div>
+                    <h3 id="preview-name">Calling a Ranger…</h3>
+                    <p class="handle" id="preview-meta">Tuning the receiver</p>
+                  </div>
+                </div>
+                <p class="ring-description" id="preview-description">A personal corner of the web is coming into view.</p>
+                <div class="tags" id="preview-tags"></div>
+                <button class="btn primary ring-visit" id="visit-ranger" type="button">open this Ranger ↗</button>
+              </article>
+            </div>
             <div class="ringcontrols">
               <button class="btn" id="previous-ranger" type="button">← previous ranger</button>
               <button class="btn random" id="random-ranger" type="button">✦ RANDOM RANGER ✦</button>
               <button class="btn" id="next-ranger" type="button">next ranger →</button>
             </div>
-            <p class="hint" id="ringhint" aria-live="polite">Warming up the orbit…</p>
+            <p class="hint" id="ringhint">PREV / NEXT TUNES THE PREVIEW · RANDOM LAUNCHES IMMEDIATELY</p>
           </div>
         </div>
       </section>
@@ -200,7 +219,9 @@ howdy pardner, wanna join the club?
     <dialog class="ranger-viewer" id="ranger-viewer" aria-labelledby="viewer-title">
       <div class="viewer-shell">
         <header class="viewer-bar">
-          <button class="viewer-button viewer-close" id="viewer-close" type="button" aria-label="Close Ranger site">×</button>
+          <button class="viewer-button viewer-close" id="viewer-close" type="button" aria-label="Back to the Rangerverse" title="Back to the Rangerverse">
+            <img src="./assets/rangerverse-return.png?v={{ASSET_VERSION}}" width="48" height="48" alt="">
+          </button>
           <div class="viewer-identity">
             <strong id="viewer-title">Ranger site</strong>
             <span id="viewer-url">Loading…</span>

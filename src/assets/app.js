@@ -8,6 +8,14 @@
   const cards = document.querySelector("#cards");
   const address = document.querySelector("#address");
   const hint = document.querySelector("#ringhint");
+  const ringScreen = document.querySelector("#ring-screen");
+  const previewStatus = document.querySelector("#preview-status");
+  const previewAvatar = document.querySelector("#preview-avatar");
+  const previewName = document.querySelector("#preview-name");
+  const previewMeta = document.querySelector("#preview-meta");
+  const previewDescription = document.querySelector("#preview-description");
+  const previewTags = document.querySelector("#preview-tags");
+  const visitRanger = document.querySelector("#visit-ranger");
   const themeToggle = document.querySelector("#theme-toggle");
   const themeMedia = matchMedia("(prefers-color-scheme: dark)");
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
@@ -63,31 +71,48 @@
       status.title = `Site status: ${ranger.status}`;
       const avatar = el("div", "avatar", ranger.avatar);
       const heading = el("h3", "", ranger.name);
-      const handle = el("div", "handle", `${ranger.handle} · ${ranger.era}`);
+      const handle = el("div", "handle", [ranger.handle, ranger.era].filter(Boolean).join(" · "));
       const description = el("p", "", ranger.description);
       const tags = el("div", "tags");
       tags.append(...ranger.tags.map((tag) => el("span", "tag", tag)));
 
-      card.append(status, avatar, heading, handle, description, tags);
+      card.append(status, avatar, heading, handle);
+      if (ranger.description) card.append(description);
+      if (ranger.tags.length) card.append(tags);
       card.addEventListener("click", (event) => openViewer(index, event));
       fragment.append(card);
     });
     cards.replaceChildren(fragment);
   }
 
-  function update() {
+  function update(animate = false) {
     const ranger = rangers[current];
     if (!ranger) return;
+    if (animate && !reducedMotion.matches) {
+      ringScreen.classList.remove("is-tuning");
+      void ringScreen.offsetWidth;
+      ringScreen.classList.add("is-tuning");
+    }
     address.textContent = `${ranger.url} ↗`;
     address.href = ranger.url;
     address.target = "_blank";
     address.rel = "noopener";
-    hint.textContent = `currently orbiting: ${ranger.slug}.html · click the address to visit`;
+    address.title = `Open ${ranger.name}'s site in the Ranger Browser`;
+    previewStatus.dataset.status = ranger.status;
+    previewStatus.title = `Site status: ${ranger.status}`;
+    previewAvatar.textContent = ranger.avatar;
+    previewName.textContent = ranger.name;
+    previewMeta.textContent = [ranger.handle, ranger.era].filter(Boolean).join(" · ");
+    previewDescription.textContent = ranger.description;
+    previewDescription.hidden = !ranger.description;
+    previewTags.replaceChildren(...ranger.tags.map((tag) => el("span", "tag", tag)));
+    previewTags.hidden = ranger.tags.length === 0;
+    visitRanger.setAttribute("aria-label", `Open ${ranger.name}'s site in the Ranger Browser`);
   }
 
   function select(index, scroll = true) {
     current = (index + rangers.length) % rangers.length;
-    update();
+    update(true);
     if (scroll) document.querySelector("#ring").scrollIntoView({ behavior: "smooth" });
   }
 
@@ -184,7 +209,9 @@
   document.querySelector("#next-ranger").addEventListener("click", () => step(1));
   document.querySelector("#random-ranger").addEventListener("click", openRandomViewer);
   document.querySelector("#enter-ring").addEventListener("click", openRandomViewer);
+  visitRanger.addEventListener("click", (event) => openViewer(current, event));
   address.addEventListener("click", (event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     openViewer(current, event);
   });
