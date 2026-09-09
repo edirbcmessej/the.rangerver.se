@@ -18,6 +18,13 @@ test("accepts a complete Ranger", () => {
   assert.deepEqual(validateRangers([ranger]), [ranger]);
 });
 
+test("accepts signup details with default presentation fields", () => {
+  const minimal = { slug: "ada", name: "Ada", url: "https://ada.example" };
+  const defaults = { handle: "", era: "", description: "", tags: [], avatar: "A", status: "online" };
+  assert.deepEqual(validateRangers([minimal]), [{ ...minimal, ...defaults }]);
+  assert.equal(validateRangers([{ ...minimal, description: "Notes and experiments." }])[0].description, "Notes and experiments.");
+});
+
 test("accepts a Ranger without invented profile copy", () => {
   const minimal = {
     slug: "shea",

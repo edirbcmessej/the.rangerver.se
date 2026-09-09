@@ -1,4 +1,4 @@
-# Add a Ranger by copying one complete block. `slug` and `url` must be unique.
+# New entries need only slug, name, and url; description is optional. Slugs and URLs must be unique.
 - slug: jacob
   name: Jacob
   handle: The Bates Report

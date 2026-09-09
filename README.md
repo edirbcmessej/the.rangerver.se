@@ -4,25 +4,22 @@ A hand-built Techrangers webring. The site is plain static HTML, CSS, and JavaSc
 
 ## Add a Ranger
 
-Open [`data/rangers.yml`](data/rangers.yml), copy one complete block, and change its values:
+Use the signup form with your name, site URL, and an optional description. Ring controls are optional.
+
+To add a Ranger directly, append this small entry to [`data/rangers.yml`](data/rangers.yml):
 
 ```yml
 - slug: ada
   name: Ada
-  handle: "@ada"
   url: https://ada.example
-  era: systems · 2026
   description: Notes, experiments, and useful little tools.
-  tags: [systems, web, music]
-  avatar: A
-  status: online
 ```
 
-`slug` is the member's permanent ring ID. It must be unique, lowercase, and use only letters, numbers, and hyphens. `status` can be `online`, `away`, `offline`, or `demo`.
+Only `slug`, `name`, and `url` are required. `description` is optional. `slug` is the member's permanent ring ID. It must be unique, lowercase, and use only letters, numbers, and hyphens.
 
-`era`, `description`, and `tags` are optional. Only add profile copy that the Ranger supplied; never infer or invent personal descriptions or labels from their website.
+The avatar defaults to the first letter of the name, and status defaults to `online`. Existing optional profile fields remain supported: `handle`, `era`, `tags`, `avatar`, and `status` (`online`, `away`, `offline`, or `demo`). Only add profile copy that the Ranger supplied; never infer or invent personal descriptions or labels from their website.
 
-That member puts this on their own site, replacing `ada` with their slug:
+Members can optionally put this on their own site, replacing `ada` with their slug:
 
 ```html
 <nav class="rangerverse">

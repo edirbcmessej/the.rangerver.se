@@ -94,18 +94,19 @@ export function validateRangers(value, file = "data/rangers.yml") {
       problems.push(`${at}.tags must contain no more than 6 tags`);
     }
 
-    const status = text(entry.status, `${at}.status`, problems, { max: 10 });
+    const status = text(entry.status ?? "online", `${at}.status`, problems, { max: 10 });
     if (status && !STATUS.has(status)) problems.push(`${at}.status must be online, away, offline, or demo`);
+    const name = text(entry.name, `${at}.name`, problems, { max: 60 });
 
     return {
       slug,
-      name: text(entry.name, `${at}.name`, problems, { max: 60 }),
-      handle: text(entry.handle, `${at}.handle`, problems, { max: 60 }),
+      name,
+      handle: text(entry.handle, `${at}.handle`, problems, { max: 60, optional: true }),
       url,
       era: text(entry.era, `${at}.era`, problems, { max: 100, optional: true }),
       description: text(entry.description, `${at}.description`, problems, { max: 240, optional: true }),
       tags,
-      avatar: text(entry.avatar, `${at}.avatar`, problems, { max: 8 }),
+      avatar: text(entry.avatar ?? Array.from(name)[0]?.toUpperCase(), `${at}.avatar`, problems, { max: 8 }),
       status,
     };
   });
