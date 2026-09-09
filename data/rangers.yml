@@ -67,3 +67,12 @@
   description: Web Designer and Developer in Orlando, FL
   avatar: Z
   status: online
+
+- slug: elias
+  name: Elias Wainberg
+  handle: saladasz.net
+  avatar: S
+  status: online
+  tags: [radio, games, writing]
+  url: https://saladasz.net
+  description: My projects, thoughts, (not my) games, and music.
