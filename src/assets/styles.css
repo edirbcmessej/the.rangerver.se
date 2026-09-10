@@ -102,7 +102,7 @@ section { padding: 55px 0; scroll-margin-top: 24px; }
 .section-title { font-size: clamp(40px, 6vw, 72px); letter-spacing: -.055em; line-height: .95; margin: 0 0 20px; color: var(--blue); }
 .lede { font-size: 20px; color: var(--muted); max-width: 720px; line-height: 1.5; }
 .ticker { color: var(--on-gold); border-block: 4px solid var(--ink); background: var(--gold); overflow: hidden; padding: 10px 0; white-space: nowrap; font: 900 14px "Courier New", monospace; }
-.ticker div { display: inline-block; animation: marquee 22s linear infinite; }
+.ticker div { display: inline-block; animation: marquee var(--ticker-duration, 22s) linear infinite; }
 .ticker span { margin-right: 45px; }
 
 .ringbox { margin-top: 38px; padding: 28px; background: var(--surface); border: 4px solid var(--ink); box-shadow: 9px 10px 0 var(--shadow); }
@@ -204,7 +204,7 @@ footer { margin-top: 60px; background: var(--footer-bg); color: var(--footer-ink
 .foot p { color: var(--footer-muted); max-width: 520px; }
 .cursor { position: fixed; right: 28px; bottom: 26px; font-size: 38px; filter: drop-shadow(3px 4px 0 var(--gold)); transform: rotate(-18deg); pointer-events: none; animation: wiggle 2.2s ease-in-out infinite; z-index: 9; }
 
-@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes marquee { to { transform: translateX(var(--ticker-offset, -50%)); } }
 @keyframes wiggle { 50% { transform: rotate(-10deg) translateY(-5px); } }
 @keyframes viewer-pulse { to { transform: scale(1.18) rotate(12deg); } }
 @keyframes ring-tune { from { opacity: .15; transform: translateY(9px); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }

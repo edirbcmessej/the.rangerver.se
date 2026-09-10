@@ -211,5 +211,26 @@
     if (!hasSavedTheme()) setTheme(event.matches ? "dark" : "light");
   });
   setTheme(document.documentElement.dataset.theme || (themeMedia.matches ? "dark" : "light"));
+
+  const tickerContent = document.querySelector(".ticker div");
+  if (tickerContent) {
+    function updateTicker() {
+      // Ensure ticker content fills width
+      while (tickerContent.scrollWidth < window.innerWidth * 2)
+        [...tickerContent.children].forEach((c) => tickerContent.appendChild(c.cloneNode(true)));
+      // Offset proper distance and ensure speed is consistent
+      const oneCopyWidth = tickerContent.scrollWidth / 2;
+      tickerContent.style.setProperty("--ticker-offset", `${-oneCopyWidth}px`);
+      tickerContent.style.setProperty("--ticker-duration", `${oneCopyWidth / 42}s`);
+    }
+    updateTicker();
+    let resizeTimer;
+    // Trigger an update if user scales the page
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateTicker, 150);
+    });
+  }
+
   start();
 })();
