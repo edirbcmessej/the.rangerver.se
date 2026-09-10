@@ -1,6 +1,6 @@
 # the rangerver.se
 
-A hand-built Techrangers webring. The site is plain static HTML, CSS, and JavaScript; YAML is the source of truth, and GitHub Actions validates and publishes every change to `main`.
+A webring for pals. The site is plain static HTML, CSS, and JavaScript; YAML is the source of truth, and GitHub Actions validates and publishes every change to `main`.
 
 ## Add a Ranger
 
