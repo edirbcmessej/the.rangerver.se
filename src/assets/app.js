@@ -211,5 +211,25 @@
     if (!hasSavedTheme()) setTheme(event.matches ? "dark" : "light");
   });
   setTheme(document.documentElement.dataset.theme || (themeMedia.matches ? "dark" : "light"));
+
+  const tickerContent = document.querySelector(".ticker div");
+  if (tickerContent) {
+    const oneCopyWidth = tickerContent.scrollWidth / 2;
+    tickerContent.style.setProperty("--ticker-offset", `${-oneCopyWidth}px`);
+
+    function updateTicker() {
+      const base = [...tickerContent.children];
+      while (tickerContent.scrollWidth < window.innerWidth * 2)
+        base.forEach((c) => tickerContent.appendChild(c.cloneNode(true)));
+    }
+    updateTicker();
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateTicker, 150);
+    });
+  }
+
   start();
 })();

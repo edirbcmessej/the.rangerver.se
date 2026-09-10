@@ -41,6 +41,9 @@ const tickerItems = site.ticker.map((item) => item.replaceAll("{count}", String(
 const tickerMarkup = [...tickerItems, ...tickerItems]
   .map((item) => `<span>${escapeHtml(item)}</span>`)
   .join("");
+const tickerSrMarkup = tickerItems
+  .map((item) => `<span>${escapeHtml(item)}</span>`)
+  .join("");
 const replacements = {
   "{{TITLE}}": escapeHtml(site.title),
   "{{DESCRIPTION}}": escapeHtml(site.description),
@@ -50,6 +53,7 @@ const replacements = {
   "{{RANGER_COUNT}}": String(rangers.length),
   "{{ASSET_VERSION}}": assetVersion,
   "{{TICKER}}": tickerMarkup,
+  "{{TICKER_SR}}": tickerSrMarkup,
 };
 
 for (const page of ["index.html", "portal/index.html"]) {

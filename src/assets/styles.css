@@ -70,6 +70,7 @@ body.viewer-open { overflow: hidden; }
 :focus-visible { outline: 4px solid var(--pink); outline-offset: 4px; }
 .skip-link { position: fixed; left: 16px; top: -80px; z-index: 99; padding: 12px 16px; background: var(--surface); border: 3px solid var(--ink); font-weight: 900; }
 .skip-link:focus { top: 16px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .wrap { width: min(1120px, calc(100% - 36px)); margin: auto; }
 .pixel { font-family: "Courier New", monospace; font-weight: 900; }
 .topbar { height: 18px; background: linear-gradient(90deg, var(--blue), var(--topbar-mid) 60%, var(--gold)); border-bottom: 3px solid var(--ink); }
@@ -102,8 +103,12 @@ section { padding: 55px 0; scroll-margin-top: 24px; }
 .section-title { font-size: clamp(40px, 6vw, 72px); letter-spacing: -.055em; line-height: .95; margin: 0 0 20px; color: var(--blue); }
 .lede { font-size: 20px; color: var(--muted); max-width: 720px; line-height: 1.5; }
 .ticker { color: var(--on-gold); border-block: 4px solid var(--ink); background: var(--gold); overflow: hidden; padding: 10px 0; white-space: nowrap; font: 900 14px "Courier New", monospace; }
-.ticker div { display: inline-block; animation: marquee 22s linear infinite; }
+.ticker div { display: inline-block; will-change: transform; animation: marquee 22s linear infinite; }
 .ticker span { margin-right: 45px; }
+.ticker:hover div,
+.ticker:focus-within div {
+  animation-play-state: paused;
+}
 
 .ringbox { margin-top: 38px; padding: 28px; background: var(--surface); border: 4px solid var(--ink); box-shadow: 9px 10px 0 var(--shadow); }
 .browserbar { display: flex; align-items: center; gap: 9px; border-bottom: 3px solid var(--ink); padding-bottom: 18px; margin-bottom: 24px; }
@@ -204,7 +209,7 @@ footer { margin-top: 60px; background: var(--footer-bg); color: var(--footer-ink
 .foot p { color: var(--footer-muted); max-width: 520px; }
 .cursor { position: fixed; right: 28px; bottom: 26px; font-size: 38px; filter: drop-shadow(3px 4px 0 var(--gold)); transform: rotate(-18deg); pointer-events: none; animation: wiggle 2.2s ease-in-out infinite; z-index: 9; }
 
-@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes marquee { to { transform: translateX(var(--ticker-offset, -50%)); } }
 @keyframes wiggle { 50% { transform: rotate(-10deg) translateY(-5px); } }
 @keyframes viewer-pulse { to { transform: scale(1.18) rotate(12deg); } }
 @keyframes ring-tune { from { opacity: .15; transform: translateY(9px); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
